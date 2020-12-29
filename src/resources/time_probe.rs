@@ -1,4 +1,4 @@
-use crate::resources::time_probe::error::TimeProbeError;
+pub use self::error::TimeProbeError;
 use chrono::{DateTime, Utc};
 use std::thread::sleep;
 use std::time::{Duration, Instant, UNIX_EPOCH};
@@ -49,6 +49,11 @@ impl TimeProbe {
             reference: (chrono::Local::now().timestamp() as u128) * 1000,
             sampled: 0,
         }
+    }
+
+    pub fn reference_time(&self) -> DateTime<Utc> {
+        let ref_time = UNIX_EPOCH + Duration::from_millis(self.reference as u64);
+        DateTime::<Utc>::from(ref_time)
     }
 
     pub fn sync_network_time(&mut self, ntp_host: &str) -> Result<(), TimeProbeError> {

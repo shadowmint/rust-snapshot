@@ -62,12 +62,21 @@ impl App {
         let mut camera = camera_factory.create_camera()?;
 
         // Setup a probe based on the manifest
-        let probe = TimeProbe::new(TimeProbeConfig {
+        let mut probe = TimeProbe::new(TimeProbeConfig {
             time_scale: 1f32,
             interval: self.manifest.config.sample_interval,
             idle: self.manifest.config.sample_idle,
             samples: -1,
         });
+
+        if self.manifest.config.use_ntp {
+            probe.sync_network_time("pool.ntp.org")?;
+            info!(
+                self.logger,
+                "synchronized time to: UTC {}",
+                probe.reference_time().to_rfc2822()
+            )
+        }
 
         // Setup an output handler from the manifest
         let image_logger = ImageLogger::new(self.output.clone(), self.logger.clone());
@@ -110,7 +119,7 @@ impl App {
 
 pub mod error {
     use crate::hardware::HardwareError;
-    use crate::resources::{LockError, ResourceError};
+    use crate::resources::{LockError, ResourceError, TimeProbe, TimeProbeError};
     use image::ImageError;
     use sloggers::Error;
     use std::fmt;
@@ -122,6 +131,7 @@ pub mod error {
         OutputError(String),
         DeviceFailed(String),
         LockFailed(String),
+        NetworkFailed(String),
     }
 
     impl std::error::Error for AppError {}
@@ -153,6 +163,12 @@ pub mod error {
     impl From<LockError> for AppError {
         fn from(err: LockError) -> Self {
             AppError::LockFailed(format!("{:?}", err))
+        }
+    }
+
+    impl From<TimeProbeError> for AppError {
+        fn from(err: TimeProbeError) -> Self {
+            AppError::NetworkFailed(format!("{:?}", err))
         }
     }
 

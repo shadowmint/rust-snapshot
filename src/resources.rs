@@ -7,4 +7,4 @@ pub use self::config_map::ConfigMap;
 pub use self::lock_file::{LockError, LockFile};
 pub use self::resource_folder::ResourceError;
 pub use self::resource_folder::ResourceFolder;
-pub use self::time_probe::{TimeProbe, TimeProbeConfig, TimeSnapshot};
+pub use self::time_probe::{TimeProbe, TimeProbeConfig, TimeProbeError, TimeSnapshot};

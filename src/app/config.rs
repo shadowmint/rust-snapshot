@@ -32,4 +32,7 @@ pub struct ManifestConfig {
 
     /// How long to sleep before checking for a new frame in ms.
     pub sample_idle: u64,
+
+    /// Should the application use NTP to get a 'real' time before starting.
+    pub use_ntp: bool,
 }

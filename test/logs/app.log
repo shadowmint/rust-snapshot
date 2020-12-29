@@ -443,3 +443,22 @@ Dec 29 12:42:07.389 INFO snapshot start: Tue, 29 Dec 2020 04:42:06 +0000, module
 Dec 29 12:42:07.392 INFO captured: 1280x720 image, module: rust_snapshot::app:85
 Dec 29 12:42:07.435 INFO snapshot end: 45ms elapsed, module: rust_snapshot::app:97
 Dec 29 12:42:07.435 INFO lock removed, halting capture, module: rust_snapshot::app:101
+Dec 29 14:46:12.987 INFO snapshot start: Tue, 29 Dec 2020 06:46:14 +0000, module: rust_snapshot::app:84
+Dec 29 14:46:12.994 INFO captured: 1280x720 image, module: rust_snapshot::app:89
+Dec 29 14:46:14.878 INFO snapshot end: 1890ms elapsed, module: rust_snapshot::app:101
+Dec 29 14:46:18.075 INFO snapshot start: Tue, 29 Dec 2020 06:46:19 +0000, module: rust_snapshot::app:84
+Dec 29 14:46:18.077 INFO captured: 1280x720 image, module: rust_snapshot::app:89
+Dec 29 14:46:20.737 INFO snapshot end: 2661ms elapsed, module: rust_snapshot::app:101
+Dec 29 14:46:23.084 INFO snapshot start: Tue, 29 Dec 2020 06:46:24 +0000, module: rust_snapshot::app:84
+Dec 29 14:46:23.087 INFO captured: 1280x720 image, module: rust_snapshot::app:89
+Dec 29 14:46:24.803 INFO snapshot end: 1719ms elapsed, module: rust_snapshot::app:101
+Dec 29 14:46:28.188 INFO snapshot start: Tue, 29 Dec 2020 06:46:29 +0000, module: rust_snapshot::app:84
+Dec 29 14:46:28.191 INFO captured: 1280x720 image, module: rust_snapshot::app:89
+Dec 29 14:46:30.526 INFO snapshot end: 2338ms elapsed, module: rust_snapshot::app:101
+Dec 29 14:46:30.526 INFO lock removed, halting capture, module: rust_snapshot::app:105
+Dec 29 14:50:08.622 INFO synchronized time to: UTC Tue, 29 Dec 2020 06:50:11 +0000, module: rust_snapshot::app:74
+Dec 29 14:50:13.654 INFO snapshot start: Tue, 29 Dec 2020 06:50:16 +0000, module: rust_snapshot::app:89
+Dec 29 14:50:13.657 INFO captured: 1280x720 image, module: rust_snapshot::app:94
+Dec 29 14:50:15.469 INFO snapshot end: 1814ms elapsed, module: rust_snapshot::app:106
+Dec 29 14:50:18.657 INFO snapshot start: Tue, 29 Dec 2020 06:50:21 +0000, module: rust_snapshot::app:89
+Dec 29 14:50:18.658 INFO captured: 1280x720 image, module: rust_snapshot::app:94

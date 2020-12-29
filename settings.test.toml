@@ -4,6 +4,7 @@ log_folder = "test/logs"
 lock_file = "test/lock"
 sample_interval = 1000
 sample_idle = 100
+use_ntp = false
 
 [export]
 export_file = "test/output.webm"
