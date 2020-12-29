@@ -9,6 +9,11 @@ like this:
     lock_file = "test/lock"
     sample_interval = 5000
     sample_idle = 100
+    use_ntp = true
+    
+    [export]
+    export_file = "test/output.webm"
+    export_framerate = 24
     
     [settings]
     backend = "avfoundation"
