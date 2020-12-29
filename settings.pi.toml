@@ -2,8 +2,8 @@
 output_folder = "test/output"
 log_folder = "test/logs"
 lock_file = "test/lock"
-sample_interval = 5000
-sample_idle = 100
+sample_interval = 300000
+sample_idle = 1000
 use_ntp = true
 
 [export]
