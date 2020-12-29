@@ -8,7 +8,7 @@ use_ntp = false
 
 [export]
 export_file = "test/output.webm"
-export_framerate = 24
+export_framerate = 5
 
 [settings]
 use_mock = "1"

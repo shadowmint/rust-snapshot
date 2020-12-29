@@ -105,6 +105,7 @@ impl App {
             let elapsed = (sample_end - sample_start).as_millis();
             info!(self.logger, "snapshot end: {}ms elapsed", elapsed);
 
+            // TODO: Move this into probe so we poll at interval, not capture interval
             // Check for early exit
             if !run_lock.is_locked() {
                 info!(self.logger, "lock removed, halting capture");
