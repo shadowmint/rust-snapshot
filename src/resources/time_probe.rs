@@ -1,4 +1,5 @@
 pub use self::error::TimeProbeError;
+use crate::resources::LockFile;
 use chrono::{DateTime, Utc};
 use std::thread::sleep;
 use std::time::{Duration, Instant, UNIX_EPOCH};
@@ -15,6 +16,9 @@ pub struct TimeProbeConfig {
 
     /// Artifically accelerate time for testing purposes
     pub time_scale: f32,
+
+    /// If the lock is provided, halt when the lock halts
+    pub lock: Option<LockFile>,
 }
 
 pub struct TimeProbe {
@@ -98,6 +102,11 @@ impl Iterator for TimeProbe {
                 let since_spawn_scale =
                     (since_spawn_real as f32 * self.config.time_scale).floor() as u128;
                 return Some(self.as_snapshot(since_spawn_scale));
+            }
+            if let Some(lock) = &self.config.lock {
+                if !lock.is_locked() {
+                    return None;
+                }
             }
             sleep(std::time::Duration::from_millis(self.config.idle));
         }

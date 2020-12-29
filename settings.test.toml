@@ -2,9 +2,10 @@
 output_folder = "test/output"
 log_folder = "test/logs"
 lock_file = "test/lock"
-sample_interval = 1000
-sample_idle = 100
+sample_interval = 300000
+sample_idle = 10
 use_ntp = false
+time_scale = 1000.0
 
 [export]
 export_file = "test/output.webm"

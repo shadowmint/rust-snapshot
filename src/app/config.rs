@@ -35,4 +35,14 @@ pub struct ManifestConfig {
 
     /// Should the application use NTP to get a 'real' time before starting.
     pub use_ntp: bool,
+
+    /// Scale time for testing, typically set this to 1
+    #[serde(default = "self::defaults::time_scale")]
+    pub time_scale: f32,
+}
+
+mod defaults {
+    pub fn time_scale() -> f32 {
+        1f32
+    }
 }

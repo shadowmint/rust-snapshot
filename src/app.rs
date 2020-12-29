@@ -61,12 +61,17 @@ impl App {
         let camera_factory = CameraFactory::new(self.camera_config.clone());
         let mut camera = camera_factory.create_camera()?;
 
+        // Keep running as long as the log lasts
+        let run_lock = LockFile::new(&self.manifest.config.lock_file);
+        run_lock.lock()?;
+
         // Setup a probe based on the manifest
         let mut probe = TimeProbe::new(TimeProbeConfig {
-            time_scale: 1f32,
+            time_scale: self.manifest.config.time_scale,
             interval: self.manifest.config.sample_interval,
             idle: self.manifest.config.sample_idle,
             samples: -1,
+            lock: Some(run_lock),
         });
 
         if self.manifest.config.use_ntp {
@@ -81,39 +86,42 @@ impl App {
         // Setup an output handler from the manifest
         let image_logger = ImageLogger::new(self.output.clone(), self.logger.clone());
 
-        // Keep running as long as the log lasts
-        let run_lock = LockFile::new(&self.manifest.config.lock_file);
-        run_lock.lock()?;
-
         for sample in probe {
+            let time_since_start = sample.elapsed;
+
             info!(self.logger, "snapshot start: {}", sample.utc.to_rfc2822());
             let sample_start = Instant::now();
 
             // Take a picture
             let frame = camera.next()?;
+            let sample_end = Instant::now();
+            let elapsed = (sample_end - sample_start).as_millis();
             info!(
                 self.logger,
-                "captured: {}x{} image",
+                "captured: {}x{} image in {}ms",
                 frame.width(),
-                frame.height()
+                frame.height(),
+                elapsed
             );
 
             // Save the picture
             image_logger.save(frame, sample)?;
-
             let sample_end = Instant::now();
             let elapsed = (sample_end - sample_start).as_millis();
-            info!(self.logger, "snapshot end: {}ms elapsed", elapsed);
+            info!(self.logger, "wrote image in {}ms", elapsed);
 
-            // TODO: Move this into probe so we poll at interval, not capture interval
-            // Check for early exit
-            if !run_lock.is_locked() {
-                info!(self.logger, "lock removed, halting capture");
-                break;
-            }
+            let hours = time_since_start / 1000 / 60 / 60;
+            let mins = time_since_start / 1000 / 60 - hours * 60;
+            let secs = time_since_start / 1000 - mins * 60;
+            info!(
+                self.logger,
+                "snapshot end: {} hours, {} min, {} sec since start", hours, mins, secs
+            );
         }
 
+        info!(self.logger, "Lock removed; halting capture");
         camera.shutdown()?;
+
         Ok(())
     }
 }
