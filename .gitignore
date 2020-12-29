@@ -2,4 +2,5 @@ target
 .idea
 test/output
 test/logs
+test/lock
 test/output.webm
