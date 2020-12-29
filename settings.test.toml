@@ -1,0 +1,15 @@
+[config]
+output_folder = "test/output"
+log_folder = "test/logs"
+lock_file = "test/lock"
+sample_interval = 1000
+sample_idle = 100
+
+[export]
+export_file = "test/output.webm"
+export_framerate = 24
+
+[settings]
+use_mock = "1"
+use_mock_folder = "test/data/frames"
+use_mock_repeat_frames = "1"

@@ -1,0 +1,23 @@
+[package]
+name = "rust-snapshot"
+version = "0.1.0"
+authors = ["Doug <douglas.linder+git@gmail.com>"]
+edition = "2018"
+
+[[bin]]
+name = "snapshot"
+path = "bin/snapshot.rs"
+
+[[bin]]
+name = "assemble"
+path = "bin/assemble.rs"
+
+[dependencies]
+image = "0.23.12"
+sloggers = "1.0.1"
+slog = "2.7.0"
+serde = { version = "1.0", features = ["derive"] }
+toml = "0.5.8"
+chrono = "0.4"
+sntpc = "0.2"
+rust-ffmpeg-capture = { path = "crates/rust-ffmpeg-capture" }

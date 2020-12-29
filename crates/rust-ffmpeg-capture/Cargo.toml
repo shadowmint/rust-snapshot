@@ -1,0 +1,9 @@
+[package]
+name = "rust-ffmpeg-capture"
+version = "0.1.0"
+authors = ["Doug <douglas.linder+git@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+ffmpeg-sys = { version = "4.2.1", features = ["avdevice"] }
+image = "0.23.12"

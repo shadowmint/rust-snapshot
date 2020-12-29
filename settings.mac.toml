@@ -1,0 +1,17 @@
+[config]
+output_folder = "test/output"
+log_folder = "test/logs"
+lock_file = "test/lock"
+sample_interval = 5000
+sample_idle = 100
+
+[export]
+export_file = "test/output.webm"
+export_framerate = 24
+
+[settings]
+backend = "avfoundation"
+resolution = "1280x720"
+framerate = "24"
+device = "0:0"
+pixel_format = "0rgb"
